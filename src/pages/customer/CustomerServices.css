@@ -1,0 +1,1653 @@
+* {
+  box-sizing: border-box;
+}
+
+.customer-services-page {
+  min-height: 100vh;
+
+  color: #1b2f24;
+
+  background: #f5f9f6;
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+.customer-services-page a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.customer-services-page button,
+.customer-services-page input {
+  font: inherit;
+}
+
+.customer-services-page button {
+  cursor: pointer;
+}
+
+/* ==============================
+   NAVBAR
+============================== */
+
+.customer-services-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+
+  min-height: 76px;
+
+  padding:
+    0
+    clamp(
+      20px,
+      5vw,
+      72px
+    );
+
+  display: grid;
+
+  grid-template-columns:
+    auto
+    1fr
+    auto;
+
+  align-items: center;
+
+  gap: 30px;
+
+  border-bottom:
+    1px solid
+    #dfe8e2;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.96
+    );
+
+  backdrop-filter:
+    blur(16px);
+}
+
+.customer-services-brand {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+}
+
+.customer-services-logo {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 13px;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #075d3e,
+      #13a365
+    );
+
+  box-shadow:
+    0 9px 20px
+    rgba(
+      8,
+      111,
+      70,
+      0.2
+    );
+
+  font-size: 0.72rem;
+
+  font-weight: 900;
+}
+
+.customer-services-brand strong {
+  display: block;
+
+  font-size: 1rem;
+}
+
+.customer-services-brand span {
+  display: block;
+
+  margin-top: 2px;
+
+  color: #87938b;
+
+  font-size: 0.67rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.7px;
+
+  text-transform: uppercase;
+}
+
+.customer-services-nav {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 7px;
+}
+
+.customer-services-nav a {
+  position: relative;
+
+  padding:
+    11px
+    14px;
+
+  border-radius: 9px;
+
+  color: #637169;
+
+  font-size: 0.81rem;
+
+  font-weight: 700;
+}
+
+.customer-services-nav a:hover,
+.customer-services-nav a.is-active {
+  color: #08754b;
+
+  background: #eff8f3;
+}
+
+.customer-services-nav a.is-active::after {
+  content: "";
+
+  position: absolute;
+
+  right: 14px;
+  bottom: 4px;
+  left: 14px;
+
+  height: 2px;
+
+  border-radius: 999px;
+
+  background: #12a163;
+}
+
+.customer-services-map-button {
+  min-height: 42px;
+
+  padding:
+    0
+    17px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  border-radius: 11px;
+
+  color: white !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #075d3e,
+      #11935d
+    );
+
+  box-shadow:
+    0 8px 18px
+    rgba(
+      7,
+      94,
+      63,
+      0.18
+    );
+
+  font-size: 0.78rem;
+
+  font-weight: 850;
+}
+
+/* ==============================
+   HERO
+============================== */
+
+.customer-services-hero {
+  position: relative;
+
+  overflow: hidden;
+
+  padding:
+    78px
+    clamp(
+      20px,
+      6vw,
+      92px
+    );
+
+  color: white;
+
+  background:
+    radial-gradient(
+      circle at 12% 20%,
+      rgba(
+        74,
+        227,
+        153,
+        0.18
+      ),
+      transparent
+      25%
+    ),
+    linear-gradient(
+      135deg,
+      #032f22,
+      #075d3e 58%,
+      #0a7f50
+    );
+}
+
+.customer-services-circle {
+  position: absolute;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.08
+    );
+
+  border-radius: 50%;
+}
+
+.customer-services-circle.circle-one {
+  top: -180px;
+  left: -150px;
+
+  width: 430px;
+  height: 430px;
+}
+
+.customer-services-circle.circle-two {
+  right: -200px;
+  bottom: -230px;
+
+  width: 500px;
+  height: 500px;
+}
+
+.customer-services-hero-content {
+  position: relative;
+
+  z-index: 2;
+
+  max-width: 1220px;
+
+  margin: auto;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.1fr)
+    minmax(
+      330px,
+      0.9fr
+    );
+
+  align-items: center;
+
+  gap: 70px;
+}
+
+.customer-services-overline {
+  display: block;
+
+  margin-bottom: 15px;
+
+  color: #60e6a5;
+
+  font-size: 0.71rem;
+
+  font-weight: 900;
+
+  letter-spacing: 1.6px;
+}
+
+.customer-services-hero h1 {
+  max-width: 740px;
+
+  margin: 0;
+
+  font-size:
+    clamp(
+      2.5rem,
+      5vw,
+      4.3rem
+    );
+
+  line-height: 1.02;
+
+  letter-spacing: -2.4px;
+}
+
+.customer-services-hero p {
+  max-width: 680px;
+
+  margin:
+    23px
+    0
+    0;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.68
+    );
+
+  font-size: 1rem;
+
+  line-height: 1.8;
+}
+
+.customer-services-hero-summary {
+  display: grid;
+
+  gap: 12px;
+}
+
+.customer-services-hero-summary article {
+  padding:
+    20px
+    22px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.1
+    );
+
+  border-radius: 16px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.065
+    );
+
+  backdrop-filter:
+    blur(10px);
+}
+
+.customer-services-hero-summary span {
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.63
+    );
+
+  font-size: 0.82rem;
+
+  font-weight: 700;
+}
+
+.customer-services-hero-summary strong {
+  color: #66e8aa;
+
+  font-size: 1.7rem;
+}
+
+/* ==============================
+   CONTENT
+============================== */
+
+.customer-services-content {
+  max-width: 1280px;
+
+  margin: auto;
+
+  padding:
+    42px
+    clamp(
+      20px,
+      5vw,
+      64px
+    )
+    80px;
+}
+
+.customer-services-search-card {
+  position: relative;
+  z-index: 5;
+
+  margin-top: -72px;
+
+  padding: 17px;
+
+  display: flex;
+
+  gap: 12px;
+
+  border:
+    1px solid
+    #dce7e0;
+
+  border-radius: 18px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.98
+    );
+
+  box-shadow:
+    0 18px 45px
+    rgba(
+      30,
+      75,
+      48,
+      0.11
+    );
+}
+
+.customer-services-search-input {
+  min-height: 49px;
+
+  flex: 1;
+
+  padding:
+    0
+    15px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  border:
+    1px solid
+    #d9e5dd;
+
+  border-radius: 11px;
+
+  background: #fbfdfc;
+}
+
+.customer-services-search-input > span {
+  color: #0b8151;
+
+  font-size: 1.25rem;
+}
+
+.customer-services-search-input input {
+  width: 100%;
+
+  border: 0;
+
+  outline: 0;
+
+  color: #293d32;
+
+  background: transparent;
+}
+
+.customer-services-search-card > button {
+  min-height: 49px;
+
+  padding:
+    0
+    18px;
+
+  border:
+    1px solid
+    #d8e4dc;
+
+  border-radius: 11px;
+
+  color: #5e7065;
+
+  background: white;
+
+  font-size: 0.76rem;
+
+  font-weight: 850;
+}
+
+/* ==============================
+   TOOLBAR
+============================== */
+
+.customer-services-toolbar {
+  margin:
+    39px
+    0
+    22px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-end;
+
+  gap: 20px;
+}
+
+.customer-services-toolbar > div span {
+  display: block;
+
+  color: #0a8050;
+
+  font-size: 0.67rem;
+
+  font-weight: 900;
+
+  letter-spacing: 1px;
+}
+
+.customer-services-toolbar > div strong {
+  display: block;
+
+  margin-top: 5px;
+
+  color: #21372b;
+
+  font-size: 1.35rem;
+}
+
+.customer-services-toolbar > a {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  color: #08784c;
+
+  font-size: 0.8rem;
+
+  font-weight: 850;
+}
+
+/* ==============================
+   SERVICES GRID
+============================== */
+
+.customer-services-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(
+        0,
+        1fr
+      )
+    );
+
+  gap: 20px;
+}
+
+.customer-service-card {
+  padding: 23px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+
+  border:
+    1px solid
+    #dfe9e3;
+
+  border-radius: 18px;
+
+  background: white;
+
+  box-shadow:
+    0 9px 26px
+    rgba(
+      39,
+      74,
+      53,
+      0.055
+    );
+
+  transition:
+    transform
+    180ms ease,
+    box-shadow
+    180ms ease,
+    border-color
+    180ms ease;
+}
+
+.customer-service-card:hover {
+  transform:
+    translateY(-4px);
+
+  border-color:
+    #c6ddcf;
+
+  box-shadow:
+    0 18px 36px
+    rgba(
+      39,
+      74,
+      53,
+      0.1
+    );
+}
+
+.customer-service-card-top {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+.customer-service-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 14px;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #075d3e,
+      #14a565
+    );
+
+  box-shadow:
+    0 8px 18px
+    rgba(
+      8,
+      111,
+      70,
+      0.18
+    );
+
+  font-size: 0.7rem;
+
+  font-weight: 900;
+}
+
+.customer-service-card-top > span {
+  color: #a1aba5;
+
+  font-size: 0.75rem;
+
+  font-weight: 900;
+}
+
+.customer-service-card-body {
+  padding:
+    20px
+    0
+    18px;
+
+  border-bottom:
+    1px solid
+    #edf2ef;
+}
+
+.customer-service-card-body h2 {
+  margin: 0;
+
+  color: #20362a;
+
+  font-size: 1.12rem;
+
+  line-height: 1.35;
+}
+
+.customer-service-card-body p {
+  margin:
+    9px
+    0
+    0;
+
+  color: #849087;
+
+  font-size: 0.76rem;
+
+  line-height: 1.6;
+}
+
+.customer-service-availability {
+  padding:
+    16px
+    0
+    13px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+.customer-service-availability span {
+  color: #8c9890;
+
+  font-size: 0.68rem;
+
+  font-weight: 800;
+}
+
+.customer-service-availability strong {
+  color: #08784b;
+
+  font-size: 0.75rem;
+}
+
+.customer-service-branch-preview {
+  min-height: 72px;
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  align-content: flex-start;
+
+  gap: 6px;
+}
+
+.customer-service-branch-preview span {
+  padding:
+    6px
+    8px;
+
+  border:
+    1px solid
+    #e1e9e4;
+
+  border-radius: 8px;
+
+  color: #647269;
+
+  background: #fafcfb;
+
+  font-size: 0.65rem;
+
+  font-weight: 700;
+}
+
+.customer-service-branch-preview span.more {
+  color: #08784c;
+
+  border-color:
+    #cfe3d7;
+
+  background: #eff8f3;
+}
+
+.customer-service-view-button {
+  width: 100%;
+
+  min-height: 43px;
+
+  margin-top: 14px;
+
+  border: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 9px;
+
+  border-radius: 10px;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #08734a,
+      #10945c
+    );
+
+  font-size: 0.74rem;
+
+  font-weight: 850;
+}
+
+/* ==============================
+   SELECTED SERVICE
+============================== */
+
+.customer-selected-service {
+  margin-top: 30px;
+
+  padding: 27px;
+
+  border:
+    1px solid
+    #cfe2d6;
+
+  border-radius: 19px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #f4faf6
+    );
+
+  box-shadow:
+    0 14px 32px
+    rgba(
+      31,
+      83,
+      50,
+      0.08
+    );
+}
+
+.customer-selected-service-header {
+  padding-bottom: 20px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 25px;
+
+  border-bottom:
+    1px solid
+    #e5ede8;
+}
+
+.customer-selected-service-header > div > span {
+  color: #0b8050;
+
+  font-size: 0.66rem;
+
+  font-weight: 900;
+
+  letter-spacing: 1px;
+}
+
+.customer-selected-service-header h2 {
+  margin:
+    7px
+    0
+    7px;
+
+  color: #20362a;
+
+  font-size: 1.5rem;
+}
+
+.customer-selected-service-header p {
+  max-width: 700px;
+
+  margin: 0;
+
+  color: #7f8e84;
+
+  font-size: 0.8rem;
+
+  line-height: 1.6;
+}
+
+.customer-selected-service-header > button {
+  width: 38px;
+  height: 38px;
+
+  flex-shrink: 0;
+
+  border:
+    1px solid
+    #dce7e0;
+
+  border-radius: 10px;
+
+  color: #6d7b72;
+
+  background: white;
+
+  font-size: 1.15rem;
+}
+
+.customer-selected-service-summary {
+  padding:
+    18px
+    0;
+}
+
+.customer-selected-service-summary span {
+  display: block;
+
+  color: #929e96;
+
+  font-size: 0.65rem;
+
+  text-transform: uppercase;
+}
+
+.customer-selected-service-summary strong {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #08794c;
+
+  font-size: 0.83rem;
+}
+
+/* service branch cards */
+
+.customer-service-branches-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(
+        0,
+        1fr
+      )
+    );
+
+  gap: 14px;
+}
+
+.customer-service-branch-card {
+  padding: 17px;
+
+  border:
+    1px solid
+    #dfe9e3;
+
+  border-radius: 14px;
+
+  background: white;
+}
+
+.customer-service-branch-top {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+}
+
+.customer-service-branch-top > div {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 11px;
+
+  color: white;
+
+  background: #0a8050;
+
+  font-size: 0.6rem;
+
+  font-weight: 900;
+}
+
+.customer-service-branch-top > span {
+  padding:
+    6px
+    8px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  border-radius: 999px;
+
+  font-size: 0.61rem;
+
+  font-weight: 850;
+}
+
+.customer-service-branch-top > span i {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+}
+
+.customer-service-branch-top > span.available {
+  color: #08784b;
+
+  background: #eaf8f1;
+}
+
+.customer-service-branch-top > span.available i {
+  background: #11a462;
+}
+
+.customer-service-branch-top > span.unavailable {
+  color: #a24747;
+
+  background: #fceeee;
+}
+
+.customer-service-branch-top > span.unavailable i {
+  background: #d35252;
+}
+
+.customer-service-branch-card h3 {
+  margin:
+    16px
+    0
+    5px;
+
+  color: #263d31;
+
+  font-size: 0.94rem;
+}
+
+.customer-service-branch-card > p {
+  min-height: 38px;
+
+  margin: 0;
+
+  color: #849087;
+
+  font-size: 0.7rem;
+
+  line-height: 1.5;
+}
+
+.customer-service-branch-info {
+  margin-top: 15px;
+
+  padding:
+    13px
+    0;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap: 9px;
+
+  border-top:
+    1px solid
+    #edf2ef;
+
+  border-bottom:
+    1px solid
+    #edf2ef;
+}
+
+.customer-service-branch-info span {
+  display: block;
+
+  color: #9aa59e;
+
+  font-size: 0.58rem;
+
+  text-transform: uppercase;
+}
+
+.customer-service-branch-info strong {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #536259;
+
+  font-size: 0.65rem;
+
+  line-height: 1.4;
+}
+
+.customer-service-branch-actions {
+  margin-top: 13px;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap: 8px;
+}
+
+.customer-service-branch-actions button {
+  min-height: 38px;
+
+  border-radius: 9px;
+
+  font-size: 0.67rem;
+
+  font-weight: 850;
+}
+
+.customer-service-branch-actions button:first-child {
+  border:
+    1px solid
+    #d8e4dc;
+
+  color: #52645a;
+
+  background: white;
+}
+
+.customer-service-branch-actions button:last-child {
+  border: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  color: white;
+
+  background: #0a8050;
+}
+
+.customer-service-no-branches {
+  padding: 24px;
+
+  text-align: center;
+
+  border:
+    1px dashed
+    #d9e5dd;
+
+  border-radius: 12px;
+
+  color: #829087;
+
+  font-size: 0.78rem;
+}
+
+/* ==============================
+   ERROR
+============================== */
+
+.customer-services-error {
+  padding:
+    18px
+    20px;
+
+  display: grid;
+
+  grid-template-columns:
+    38px
+    1fr
+    auto;
+
+  align-items: center;
+
+  gap: 14px;
+
+  border:
+    1px solid
+    #f0c7c7;
+
+  border-radius: 14px;
+
+  color: #843b3b;
+
+  background: #fff7f7;
+}
+
+.customer-services-error > div:first-child {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 11px;
+
+  color: white;
+
+  background: #ce4e4e;
+
+  font-weight: 900;
+}
+
+.customer-services-error strong {
+  display: block;
+
+  font-size: 0.86rem;
+}
+
+.customer-services-error p {
+  margin:
+    4px
+    0
+    0;
+
+  color: #9c5a5a;
+
+  font-size: 0.75rem;
+}
+
+.customer-services-error button {
+  min-height: 38px;
+
+  padding:
+    0
+    13px;
+
+  border:
+    1px solid
+    #e4b7b7;
+
+  border-radius: 9px;
+
+  color: #913f3f;
+
+  background: white;
+
+  font-weight: 850;
+}
+
+/* ==============================
+   LOADING
+============================== */
+
+.service-loading-card {
+  min-height: 340px;
+
+  pointer-events: none;
+}
+
+.service-skeleton {
+  border-radius: 8px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #edf2ef 25%,
+      #f7faf8 50%,
+      #edf2ef 75%
+    );
+
+  background-size:
+    200%
+    100%;
+
+  animation:
+    service-shimmer
+    1.4s
+    infinite;
+}
+
+.service-skeleton-icon {
+  width: 48px;
+  height: 48px;
+}
+
+.service-skeleton-title {
+  width: 68%;
+  height: 22px;
+
+  margin-top: 25px;
+}
+
+.service-skeleton-line {
+  width: 100%;
+  height: 11px;
+
+  margin-top: 13px;
+}
+
+.service-skeleton-line.short {
+  width: 62%;
+}
+
+.service-skeleton-button {
+  width: 100%;
+  height: 43px;
+
+  margin-top: auto;
+}
+
+@keyframes service-shimmer {
+  to {
+    background-position:
+      -200%
+      0;
+  }
+}
+
+/* ==============================
+   EMPTY
+============================== */
+
+.customer-services-empty {
+  max-width: 600px;
+
+  margin:
+    60px
+    auto
+    0;
+
+  padding:
+    50px
+    30px;
+
+  text-align: center;
+
+  border:
+    1px solid
+    #dfe9e3;
+
+  border-radius: 19px;
+
+  background: white;
+
+  box-shadow:
+    0 12px 30px
+    rgba(
+      38,
+      75,
+      51,
+      0.06
+    );
+}
+
+.customer-services-empty > div {
+  width: 60px;
+  height: 60px;
+
+  margin:
+    0
+    auto
+    17px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 17px;
+
+  color: #0a8050;
+
+  background: #eaf7f0;
+
+  font-size: 1.5rem;
+}
+
+.customer-services-empty > span {
+  color: #0a8050;
+
+  font-size: 0.66rem;
+
+  font-weight: 900;
+
+  letter-spacing: 1px;
+}
+
+.customer-services-empty h2 {
+  margin:
+    9px
+    0
+    7px;
+
+  color: #273d31;
+}
+
+.customer-services-empty p {
+  margin: 0;
+
+  color: #849087;
+
+  font-size: 0.8rem;
+}
+
+.customer-services-empty button {
+  min-height: 42px;
+
+  margin-top: 20px;
+
+  padding:
+    0
+    16px;
+
+  border: 0;
+
+  border-radius: 10px;
+
+  color: white;
+
+  background: #0a8050;
+
+  font-size: 0.75rem;
+
+  font-weight: 850;
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media (max-width: 1080px) {
+  .customer-services-navbar {
+    grid-template-columns:
+      auto
+      1fr;
+  }
+
+  .customer-services-nav {
+    display: none;
+  }
+
+  .customer-services-map-button {
+    justify-self: end;
+  }
+
+  .customer-services-hero-content {
+    grid-template-columns: 1fr;
+
+    gap: 38px;
+  }
+
+  .customer-services-hero-summary {
+    grid-template-columns:
+      repeat(
+        3,
+        1fr
+      );
+  }
+
+  .customer-services-grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(
+          0,
+          1fr
+        )
+      );
+  }
+
+  .customer-service-branches-grid {
+    grid-template-columns:
+      repeat(
+        2,
+        1fr
+      );
+  }
+}
+
+@media (max-width: 700px) {
+  .customer-services-navbar {
+    min-height: 68px;
+
+    padding:
+      0
+      16px;
+  }
+
+  .customer-services-brand span {
+    display: none;
+  }
+
+  .customer-services-map-button {
+    min-height: 38px;
+
+    padding:
+      0
+      12px;
+
+    font-size: 0.7rem;
+  }
+
+  .customer-services-hero {
+    padding:
+      58px
+      20px
+      92px;
+  }
+
+  .customer-services-hero h1 {
+    font-size:
+      clamp(
+        2.3rem,
+        11vw,
+        3.3rem
+      );
+
+    letter-spacing:
+      -1.7px;
+  }
+
+  .customer-services-hero-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .customer-services-content {
+    padding-right: 16px;
+
+    padding-left: 16px;
+  }
+
+  .customer-services-search-card {
+    margin-top: -62px;
+  }
+
+  .customer-services-toolbar {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .customer-services-grid,
+  .customer-service-branches-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .customer-selected-service {
+    padding: 20px;
+  }
+
+  .customer-services-error {
+    grid-template-columns:
+      38px
+      1fr;
+  }
+
+  .customer-services-error button {
+    grid-column:
+      1 / -1;
+  }
+}
+
+@media (max-width: 430px) {
+  .customer-service-branch-info,
+  .customer-service-branch-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
+  .customer-services-page *,
+  .customer-services-page *::before,
+  .customer-services-page *::after {
+    transition-duration:
+      0.01ms !important;
+
+    animation-duration:
+      0.01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+  }
+}
