@@ -453,6 +453,7 @@ function AdminReports() {
             branch.address,
             branch.phone,
             branch.opening_hours,
+            branch.closing_hours,
             categoryName,
             serviceNames,
           ]
@@ -566,6 +567,7 @@ function AdminReports() {
       "Category",
       "Phone",
       "Opening Hours",
+      "Closing Hours",
       "ATM Status",
       "Latitude",
       "Longitude",
@@ -590,6 +592,8 @@ function AdminReports() {
             ),
             branch.phone || "",
             branch.opening_hours ||
+              "",
+            branch.closing_hours ||
               "",
             branch.atm_status
               ? "Available"
@@ -1540,6 +1544,10 @@ function AdminReports() {
                     <th>
                       Opening Hours
                     </th>
+
+                    <th>
+                      Closing Hours
+                    </th>
                   </tr>
 
                 </thead>
@@ -1659,6 +1667,11 @@ function AdminReports() {
 
                           <td>
                             {branch.opening_hours ||
+                              "—"}
+                          </td>
+
+                          <td>
+                            {branch.closing_hours ||
                               "—"}
                           </td>
 

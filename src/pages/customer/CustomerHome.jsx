@@ -631,7 +631,8 @@ function CustomerHome() {
                         <div>
                           <span>Opening hours</span>
                           <strong>
-                            {branch.opening_hours}
+                            {branch.opening_hours || "Not available"}
+                            {branch.closing_hours && ` - ${branch.closing_hours}`}
                           </strong>
                         </div>
 

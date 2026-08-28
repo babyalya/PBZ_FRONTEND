@@ -703,8 +703,8 @@ function CustomerServices() {
                             </span>
 
                             <strong>
-                              {branch.opening_hours ||
-                                "Not available"}
+                              {branch.opening_hours || "Not available"}
+                              {branch.closing_hours && ` - ${branch.closing_hours}`}
                             </strong>
 
                           </div>

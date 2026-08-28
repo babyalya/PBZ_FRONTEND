@@ -60,7 +60,7 @@ body {
   color: var(--pbz-ink-950);
   background: var(--pbz-page);
   font-family:
-    Inter,
+    "Trebuchet MS",
     ui-sans-serif,
     system-ui,
     -apple-system,
@@ -91,6 +91,7 @@ input:focus-visible {
 .customer-home-page {
   min-height: 100vh;
   overflow-x: clip;
+  isolation: isolate;
   background:
     radial-gradient(circle at 8% 14%, rgba(25, 168, 106, 0.035), transparent 22%),
     var(--pbz-page);
@@ -133,6 +134,7 @@ input:focus-visible {
   gap: 34px;
   border-bottom: 1px solid #dfe8e2;
   background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 10px 30px rgba(7, 54, 35, 0.07);
   backdrop-filter: blur(16px);
 }
 
@@ -292,6 +294,14 @@ input:focus-visible {
   box-shadow: 0 12px 26px rgba(8, 116, 74, 0.25);
 }
 
+.customer-home-navigation a:focus-visible,
+.customer-header-link:focus-visible,
+.customer-hero-search button:focus-visible,
+.customer-hero-search input:focus-visible {
+  outline: 3px solid rgba(105, 232, 173, 0.55);
+  outline-offset: 3px;
+}
+
 /* =========================================================
    HERO
 ========================================================= */
@@ -305,6 +315,17 @@ input:focus-visible {
     radial-gradient(circle at 83% 17%, rgba(81, 229, 157, 0.25), transparent 27%),
     radial-gradient(circle at 8% 92%, rgba(255, 255, 255, 0.08), transparent 24%),
     linear-gradient(125deg, #032b20 0%, #054a34 43%, #087149 72%, #0b8b56 100%);
+}
+
+.customer-hero-section::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.22);
+  pointer-events: none;
 }
 
 .customer-hero-section::before {
@@ -472,6 +493,11 @@ input:focus-visible {
 .customer-hero-search button:hover {
   transform: translateY(-1px);
   box-shadow: 0 11px 24px rgba(8, 113, 73, 0.27);
+}
+
+.customer-hero-search button:active,
+.customer-header-link:active {
+  transform: translateY(1px);
 }
 
 .customer-hero-links {

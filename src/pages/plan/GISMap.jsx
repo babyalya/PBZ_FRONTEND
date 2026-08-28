@@ -105,6 +105,7 @@ function GISMap() {
         branch.address,
         branch.phone,
         branch.opening_hours,
+        branch.closing_hours,
         getCategoryName(branch.category),
       ].filter(Boolean).join(" ").toLowerCase();
 
@@ -360,7 +361,7 @@ function GISMap() {
                         <span className={isATM ? "gis-location-type-atm" : "gis-location-type-branch"}>
                           {isATM ? "Standalone ATM" : getCategoryName(location.category)}
                         </span>
-                        <span>{location.opening_hours || "Hours not specified"}</span>
+                        <span>{location.opening_hours || (isATM ? "24/7" : "Hours not specified")}</span>
                       </div>
                     </div>
                     <div className="gis-card-arrow">›</div>
@@ -498,7 +499,15 @@ function BranchPopup({ branch, categoryName }) {
       <div className="branch-popup-details">
         <PopupDetail icon="LOC" label="Address" value={branch.address} />
         <PopupDetail icon="TEL" label="Phone" value={branch.phone} />
-        <PopupDetail icon="HRS" label="Opening hours" value={branch.opening_hours} />
+        <PopupDetail
+          icon="HRS"
+          label="Opening hours"
+          value={
+            branch.closing_hours
+              ? `${branch.opening_hours || "Not available"} - ${branch.closing_hours}`
+              : branch.opening_hours
+          }
+        />
       </div>
       <a href={googleMapsUrl} target="_blank" rel="noreferrer" className="branch-directions-button">Get Directions</a>
     </div>
@@ -517,7 +526,7 @@ function StandaloneATMPopup({ atm }) {
       <span className="branch-popup-category gis-atm-popup-category">Standalone ATM</span>
       <div className="branch-popup-details">
         <PopupDetail icon="LOC" label="Address" value={atm.address} />
-        <PopupDetail icon="HRS" label="Opening hours" value={atm.opening_hours || "Not specified"} />
+        <PopupDetail icon="HRS" label="Opening hours" value={atm.opening_hours || "24/7"} />
         {atm.description && <PopupDetail icon="INF" label="Description" value={atm.description} />}
       </div>
       <a href={googleMapsUrl} target="_blank" rel="noreferrer" className="branch-directions-button">Get Directions</a>

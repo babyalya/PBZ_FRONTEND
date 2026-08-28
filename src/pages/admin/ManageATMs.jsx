@@ -15,7 +15,7 @@ const initialFormData = {
   latitude: "",
   longitude: "",
   atm_status: true,
-  opening_hours: "",
+  opening_hours: "24/7",
   description: "",
   location_mode: "map",
 };
@@ -109,7 +109,7 @@ function ManageATMs() {
       latitude: atm.latitude ?? "",
       longitude: atm.longitude ?? "",
       atm_status: atm.atm_status !== false,
-      opening_hours: atm.opening_hours || "",
+      opening_hours: atm.opening_hours || "24/7",
       description: atm.description || "",
       location_mode: "manual",
     });
@@ -203,10 +203,6 @@ function ManageATMs() {
       errors.longitude = "Enter a valid longitude between -180 and 180.";
     }
 
-    if (formData.opening_hours.trim().length > 100) {
-      errors.opening_hours = "Opening hours must be 100 characters or fewer.";
-    }
-
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -222,7 +218,9 @@ function ManageATMs() {
       latitude: formData.latitude.trim(),
       longitude: formData.longitude.trim(),
       atm_status: Boolean(formData.atm_status),
-      opening_hours: formData.opening_hours.trim(),
+      opening_hours: editingATMId
+        ? formData.opening_hours || "24/7"
+        : "24/7",
       description: formData.description.trim() || null,
     };
 
@@ -323,7 +321,7 @@ function ManageATMs() {
                       <td><div className="atm-table-name"><div>ATM</div><span><strong>{atm.atm_name}</strong><small>ATM ID: {atm.id}</small></span></div></td>
                       <td><p className="atm-table-address">{atm.address}</p></td>
                       <td><span className={`atm-table-status ${atm.atm_status ? "available" : "unavailable"}`}><i></i>{atm.atm_status ? "Available" : "Unavailable"}</span></td>
-                      <td>{atm.opening_hours || "Not specified"}</td>
+                      <td>{atm.opening_hours || "24/7"}</td>
                       <td><span className="atm-coordinate">{atm.latitude}, {atm.longitude}</span></td>
                       <td>
                         <div className="atm-table-actions">
@@ -352,7 +350,6 @@ function ManageATMs() {
             <form className="atm-form" onSubmit={handleSubmit} noValidate>
               <div className="atm-form-grid">
                 <Field label="ATM name" name="atm_name" value={formData.atm_name} onChange={handleInputChange} error={formErrors.atm_name} placeholder="PBZ Darajani ATM" />
-                <Field label="Opening hours" name="opening_hours" value={formData.opening_hours} onChange={handleInputChange} error={formErrors.opening_hours} placeholder="24 Hours" />
                 <div className="atm-form-group full">
                   <label>ATM location</label>
                   <div className="atm-location-mode">
@@ -421,7 +418,7 @@ function ManageATMs() {
             <div className="atm-view-status"><span className={selectedATM.atm_status ? "available" : "unavailable"}><i></i>{selectedATM.atm_status ? "ATM Available" : "ATM Unavailable"}</span></div>
             <div className="atm-view-grid">
               <Detail label="Address" value={selectedATM.address} />
-              <Detail label="Opening Hours" value={selectedATM.opening_hours || "Not specified"} />
+              <Detail label="Opening Hours" value={selectedATM.opening_hours || "24/7"} />
               <Detail label="Latitude" value={selectedATM.latitude} />
               <Detail label="Longitude" value={selectedATM.longitude} />
             </div>

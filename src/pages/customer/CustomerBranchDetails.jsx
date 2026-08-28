@@ -725,6 +725,7 @@ function CustomerBranchDetails() {
                     <strong>
                       {branch.opening_hours ||
                         "Not available"}
+                      {branch.closing_hours && ` - ${branch.closing_hours}`}
                     </strong>
 
                   </div>
@@ -1101,6 +1102,7 @@ function CustomerBranchDetails() {
                     <p>
                       {branch.opening_hours ||
                         "Opening hours unavailable."}
+                      {branch.closing_hours && ` - ${branch.closing_hours}`}
                     </p>
 
                   </div>

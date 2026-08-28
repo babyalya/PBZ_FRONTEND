@@ -1107,6 +1107,7 @@ const initialFormData = {
   longitude: "",
   phone: "",
   opening_hours: "",
+  closing_hours: "",
   atm_status: true,
   category: "",
 
@@ -1380,6 +1381,9 @@ function ManageBranches() {
 
       opening_hours:
         branch.opening_hours || "",
+
+      closing_hours:
+        branch.closing_hours || "",
 
       atm_status:
         Boolean(
@@ -1759,6 +1763,28 @@ function ManageBranches() {
         "Opening hours are required.";
     }
 
+    if (
+      !formData.closing_hours.trim()
+    ) {
+      errors.closing_hours =
+        "Closing hours are required.";
+    }
+
+    [
+      ["opening_hours", formData.opening_hours],
+      ["closing_hours", formData.closing_hours],
+    ].forEach(([fieldName, timeValue]) => {
+      if (!timeValue) {
+        return;
+      }
+
+      const minutes = Number(timeValue.split(":")[1]);
+
+      if (!Number.isInteger(minutes) || minutes % 15 !== 0) {
+        errors[fieldName] = "Choose a quarter-hour: 00, 15, 30 or 45.";
+      }
+    });
+
 
     if (
       !formData.category
@@ -1830,6 +1856,9 @@ function ManageBranches() {
 
       opening_hours:
         formData.opening_hours.trim(),
+
+      closing_hours:
+        formData.closing_hours.trim(),
 
       atm_status:
         formData.atm_status,
@@ -2425,6 +2454,7 @@ function ManageBranches() {
                                 {
                                   branch.opening_hours
                                 }
+                                {branch.closing_hours && ` - ${branch.closing_hours}`}
                               </small>
 
                             </div>
@@ -3210,16 +3240,17 @@ function ManageBranches() {
                     HOURS
                 ================================= */}
 
-                <div className="branch-form-group full-width">
+                <div className="branch-form-group">
 
                   <label htmlFor="opening_hours">
                     Opening hours
                   </label>
 
                   <input
-                    type="text"
+                    type="time"
                     id="opening_hours"
                     name="opening_hours"
+                    step="900"
                     value={
                       formData.opening_hours
                     }
@@ -3238,6 +3269,41 @@ function ManageBranches() {
                     <small>
                       {
                         formErrors.opening_hours
+                      }
+                    </small>
+                  )}
+
+                </div>
+
+
+                <div className="branch-form-group">
+
+                  <label htmlFor="closing_hours">
+                    Closing hours
+                  </label>
+
+                  <input
+                    type="time"
+                    id="closing_hours"
+                    name="closing_hours"
+                    step="900"
+                    value={
+                      formData.closing_hours
+                    }
+                    onChange={
+                      handleInputChange
+                    }
+                    className={
+                      formErrors.closing_hours
+                        ? "field-has-error"
+                        : ""
+                    }
+                  />
+
+                  {formErrors.closing_hours && (
+                    <small>
+                      {
+                        formErrors.closing_hours
                       }
                     </small>
                   )}

@@ -239,7 +239,7 @@ function CustomerATMs() {
                   <div className="customer-atm-meta">
                     <div>
                       <span>Opening hours</span>
-                      <strong>{atm.opening_hours || "Not specified"}</strong>
+                      <strong>{atm.opening_hours || "24/7"}</strong>
                     </div>
                     <div>
                       <span>Coordinates</span>
@@ -300,7 +300,7 @@ function CustomerATMs() {
 
             <div className="customer-atm-modal-grid">
               <article><span>Address</span><strong>{selectedATM.address}</strong></article>
-              <article><span>Opening hours</span><strong>{selectedATM.opening_hours || "Not specified"}</strong></article>
+              <article><span>Opening hours</span><strong>{selectedATM.opening_hours || "24/7"}</strong></article>
               <article><span>Latitude</span><strong>{selectedATM.latitude}</strong></article>
               <article><span>Longitude</span><strong>{selectedATM.longitude}</strong></article>
             </div>
