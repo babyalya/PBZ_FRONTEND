@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import AdminNavbar from "../../components/AdminNavbar";
+
 import {
   getBranches,
   getCategories,
@@ -122,69 +124,7 @@ function AdminDashboard() {
 
   return (
     <div className="admin-dashboard">
-      <aside className="admin-sidebar">
-        <div className="sidebar-brand">
-          <div className="sidebar-brand-logo">PBZ</div>
-
-          <div>
-            <h1>PBZ GIS</h1>
-            <p>Administration</p>
-          </div>
-        </div>
-
-        <nav className="sidebar-navigation">
-          <p className="navigation-title">MAIN MENU</p>
-
-          <Link
-            to="/admin/dashboard"
-            className="sidebar-link sidebar-link-active"
-          >
-            <span className="sidebar-link-icon">DB</span>
-            <span>Dashboard</span>
-          </Link>
-
-          <Link to="/admin/branches" className="sidebar-link">
-            <span className="sidebar-link-icon">BR</span>
-            <span>Branches</span>
-          </Link>
-
-          <Link to="/admin/categories" className="sidebar-link">
-            <span className="sidebar-link-icon">CT</span>
-            <span>Categories</span>
-          </Link>
-
-          <Link to="/admin/services" className="sidebar-link">
-            <span className="sidebar-link-icon">SV</span>
-            <span>Services</span>
-          </Link>
-
-          <Link to="/admin/customers" className="sidebar-link">
-            <span className="sidebar-link-icon">CU</span>
-            <span>Customers</span>
-          </Link>
-
-          <Link to="/admin/map" className="sidebar-link">
-            <span className="sidebar-link-icon">MP</span>
-            <span>GIS Map</span>
-          </Link>
-
-          <Link to="/admin/reports" className="sidebar-link">
-            <span className="sidebar-link-icon">RP</span>
-            <span>Reports</span>
-          </Link>
-        </nav>
-
-        <div className="sidebar-footer">
-          <div className="sidebar-help">
-            <span className="sidebar-help-icon">?</span>
-
-            <div>
-              <strong>Need help?</strong>
-              <p>PBZ GIS administration portal</p>
-            </div>
-          </div>
-        </div>
-      </aside>
+      <AdminNavbar />
 
       <main className="dashboard-main">
         <header className="dashboard-header">

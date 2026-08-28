@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import AdminNavbar from "../../components/AdminNavbar";
 
 import {
   createCategory,
@@ -300,60 +300,7 @@ function ManageCategories() {
 
   return (
     <div className="manage-categories-page">
-      <aside className="categories-sidebar">
-        <div className="categories-sidebar-brand">
-          <div className="categories-brand-logo">PBZ</div>
-
-          <div>
-            <h1>PBZ GIS</h1>
-            <p>Administration</p>
-          </div>
-        </div>
-
-        <nav className="categories-navigation">
-          <p className="categories-navigation-title">MAIN MENU</p>
-
-          <Link
-            to="/admin/dashboard"
-            className="categories-nav-link"
-          >
-            <span>DB</span>
-            Dashboard
-          </Link>
-
-          <Link
-            to="/admin/branches"
-            className="categories-nav-link"
-          >
-            <span>BR</span>
-            Branches
-          </Link>
-
-          <Link
-            to="/admin/categories"
-            className="categories-nav-link active"
-          >
-            <span>CT</span>
-            Categories
-          </Link>
-
-          <Link
-            to="/admin/services"
-            className="categories-nav-link"
-          >
-            <span>SV</span>
-            Services
-          </Link>
-
-          <Link
-            to="/admin/customers"
-            className="categories-nav-link"
-          >
-            <span>CU</span>
-            Customers
-          </Link>
-        </nav>
-      </aside>
+      <AdminNavbar />
 
       <main className="categories-main">
         <header className="categories-header">

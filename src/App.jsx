@@ -13,6 +13,7 @@ import CustomerLogin from "./pages/customer/CustomerLogin";
 import CustomerBranches from "./pages/customer/CustomerBranches";
 import CustomerBranchDetails from "./pages/customer/CustomerBranchDetails";
 import CustomerServices from "./pages/customer/CustomerServices";
+import CustomerATMs from "./pages/customer/CustomerATMs";
 
 
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -23,6 +24,7 @@ import ManageServices from "./pages/admin/ManageServices";
 import ManageCustomers from "./pages/admin/ManageCustomers";
 import AdminMap from "./pages/admin/AdminMap";
 import AdminReports from "./pages/admin/AdminReports";
+import ManageATMs from "./pages/admin/ManageATMs";
 
 
 import AdminProtectedRoute from "./components/AdminProtectedRoute";
@@ -64,6 +66,11 @@ function App() {
           element={
             <CustomerBranches />
           }
+        />
+
+        <Route
+          path="/atms"
+          element={<CustomerATMs />}
         />
 
         <Route
@@ -145,6 +152,16 @@ function App() {
 
 
         <Route
+          path="/admin/atms"
+          element={
+            <AdminProtectedRoute>
+              <ManageATMs />
+            </AdminProtectedRoute>
+          }
+        />
+
+
+        <Route
           path="/admin/customers"
           element={
             <AdminProtectedRoute>
@@ -180,6 +197,16 @@ function App() {
 
         <Route
           path="/admin"
+          element={
+            <Navigate
+              to="/admin/login"
+              replace
+            />
+          }
+        />
+
+        <Route
+          path="/admin/*"
           element={
             <Navigate
               to="/admin/login"

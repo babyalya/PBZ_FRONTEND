@@ -4,8 +4,7 @@ import {
   useState,
 } from "react";
 
-import { Link } from "react-router-dom";
-
+import AdminNavbar from "../../components/AdminNavbar";
 import {
   createCustomer,
   deleteCustomer,
@@ -674,86 +673,7 @@ function ManageCustomers() {
 
   return (
     <div className="manage-customers-page">
-      {/* Sidebar */}
-
-      <aside className="customers-sidebar">
-        <div className="customers-sidebar-brand">
-          <div className="customers-brand-logo">
-            PBZ
-          </div>
-
-          <div>
-            <h1>
-              PBZ GIS
-            </h1>
-
-            <p>
-              Administration
-            </p>
-          </div>
-        </div>
-
-        <nav className="customers-navigation">
-          <p className="customers-navigation-title">
-            MAIN MENU
-          </p>
-
-          <Link
-            to="/admin/dashboard"
-            className="customers-nav-link"
-          >
-            <span>
-              DB
-            </span>
-
-            Dashboard
-          </Link>
-
-          <Link
-            to="/admin/branches"
-            className="customers-nav-link"
-          >
-            <span>
-              BR
-            </span>
-
-            Branches
-          </Link>
-
-          <Link
-            to="/admin/categories"
-            className="customers-nav-link"
-          >
-            <span>
-              CT
-            </span>
-
-            Categories
-          </Link>
-
-          <Link
-            to="/admin/services"
-            className="customers-nav-link"
-          >
-            <span>
-              SV
-            </span>
-
-            Services
-          </Link>
-
-          <Link
-            to="/admin/customers"
-            className="customers-nav-link active"
-          >
-            <span>
-              CU
-            </span>
-
-            Customers
-          </Link>
-        </nav>
-      </aside>
+      <AdminNavbar />
 
       {/* Main */}
 

@@ -184,3 +184,34 @@ export const adminLogin = (
     credentials
   );
 };
+
+
+/*
+|--------------------------------------------------------------------------
+| Standalone ATM endpoints
+|--------------------------------------------------------------------------
+*/
+
+export const getATMs = () => {
+  return api.get("/atms/");
+};
+
+export const getATMById = (id) => {
+  return api.get(`/atms/${id}/`);
+};
+
+export const createATM = (atmData) => {
+  return api.post("/atms/", atmData);
+};
+
+export const updateATM = (id, atmData) => {
+  return api.put(`/atms/${id}/`, atmData);
+};
+
+export const patchATM = (id, atmData) => {
+  return api.patch(`/atms/${id}/`, atmData);
+};
+
+export const deleteATM = (id) => {
+  return api.delete(`/atms/${id}/`);
+};

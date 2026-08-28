@@ -4,7 +4,7 @@ import {
   useState,
 } from "react";
 
-import { Link } from "react-router-dom";
+import AdminNavbar from "../../components/AdminNavbar";
 
 import {
   getBranches,
@@ -700,124 +700,7 @@ function AdminReports() {
   return (
     <div className="admin-reports-page">
 
-      {/* =================================
-          SIDEBAR
-      ================================= */}
-
-      <aside className="reports-sidebar">
-
-        <div className="reports-sidebar-brand">
-
-          <div className="reports-brand-logo">
-            PBZ
-          </div>
-
-          <div>
-            <h1>
-              PBZ GIS
-            </h1>
-
-            <p>
-              Administration
-            </p>
-          </div>
-
-        </div>
-
-
-        <nav className="reports-navigation">
-
-          <p className="reports-navigation-title">
-            MAIN MENU
-          </p>
-
-
-          <Link
-            to="/admin/dashboard"
-            className="reports-nav-link"
-          >
-            <span>
-              DB
-            </span>
-
-            Dashboard
-          </Link>
-
-
-          <Link
-            to="/admin/branches"
-            className="reports-nav-link"
-          >
-            <span>
-              BR
-            </span>
-
-            Branches
-          </Link>
-
-
-          <Link
-            to="/admin/categories"
-            className="reports-nav-link"
-          >
-            <span>
-              CT
-            </span>
-
-            Categories
-          </Link>
-
-
-          <Link
-            to="/admin/services"
-            className="reports-nav-link"
-          >
-            <span>
-              SV
-            </span>
-
-            Services
-          </Link>
-
-
-          <Link
-            to="/admin/customers"
-            className="reports-nav-link"
-          >
-            <span>
-              CU
-            </span>
-
-            Customers
-          </Link>
-
-
-          <Link
-            to="/admin/map"
-            className="reports-nav-link"
-          >
-            <span>
-              MP
-            </span>
-
-            GIS Map
-          </Link>
-
-
-          <Link
-            to="/admin/reports"
-            className="reports-nav-link active"
-          >
-            <span>
-              RP
-            </span>
-
-            Reports
-          </Link>
-
-        </nav>
-
-      </aside>
+      <AdminNavbar />
 
 
       {/* =================================

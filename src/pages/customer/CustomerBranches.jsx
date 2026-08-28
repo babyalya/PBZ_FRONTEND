@@ -489,6 +489,10 @@ function CustomerBranches() {
             Services
           </Link>
 
+          <Link to="/atms">
+            ATMs
+          </Link>
+
           <Link to="/map">
             Map
           </Link>

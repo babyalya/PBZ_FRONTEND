@@ -13,10 +13,9 @@ import {
   useMap,
 } from "react-leaflet";
 
-import {
-  Link,
-  useNavigate,
-} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import AdminNavbar from "../../components/AdminNavbar";
 
 import L from "leaflet";
 
@@ -477,112 +476,7 @@ function AdminMap() {
   return (
     <div className="admin-map-page">
 
-      {/* =================================
-          SIDEBAR NAVIGATION
-      ================================= */}
-
-      <aside className="admin-map-sidebar">
-
-        <div className="admin-map-brand">
-
-          <div className="admin-map-brand-logo">
-            PBZ
-          </div>
-
-          <div>
-            <h1>
-              PBZ GIS
-            </h1>
-
-            <p>
-              Administration
-            </p>
-          </div>
-
-        </div>
-
-
-        <nav className="admin-map-navigation">
-
-          <p className="admin-map-navigation-title">
-            MAIN MENU
-          </p>
-
-
-          <Link
-            to="/admin/dashboard"
-            className="admin-map-nav-link"
-          >
-            <span>
-              DB
-            </span>
-
-            Dashboard
-          </Link>
-
-
-          <Link
-            to="/admin/branches"
-            className="admin-map-nav-link"
-          >
-            <span>
-              BR
-            </span>
-
-            Branches
-          </Link>
-
-
-          <Link
-            to="/admin/categories"
-            className="admin-map-nav-link"
-          >
-            <span>
-              CT
-            </span>
-
-            Categories
-          </Link>
-
-
-          <Link
-            to="/admin/services"
-            className="admin-map-nav-link"
-          >
-            <span>
-              SV
-            </span>
-
-            Services
-          </Link>
-
-
-          <Link
-            to="/admin/customers"
-            className="admin-map-nav-link"
-          >
-            <span>
-              CU
-            </span>
-
-            Customers
-          </Link>
-
-
-          <Link
-            to="/admin/map"
-            className="admin-map-nav-link active"
-          >
-            <span>
-              MP
-            </span>
-
-            GIS Map
-          </Link>
-
-        </nav>
-
-      </aside>
+      <AdminNavbar />
 
 
       {/* =================================

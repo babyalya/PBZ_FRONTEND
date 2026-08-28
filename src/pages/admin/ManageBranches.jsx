@@ -1070,7 +1070,7 @@ import {
   useState,
 } from "react";
 
-import { Link } from "react-router-dom";
+import AdminNavbar from "../../components/AdminNavbar";
 
 import {
   CircleMarker,
@@ -2044,100 +2044,7 @@ function ManageBranches() {
   return (
     <div className="manage-branches-page">
 
-      {/* =================================
-          SIDEBAR
-      ================================= */}
-
-      <aside className="branches-sidebar">
-
-        <div className="branches-sidebar-brand">
-
-          <div className="branches-brand-logo">
-            PBZ
-          </div>
-
-          <div>
-            <h1>
-              PBZ GIS
-            </h1>
-
-            <p>
-              Administration
-            </p>
-          </div>
-
-        </div>
-
-
-        <nav className="branches-navigation">
-
-          <p className="branches-navigation-title">
-            MAIN MENU
-          </p>
-
-
-          <Link
-            to="/admin/dashboard"
-            className="branches-nav-link"
-          >
-            <span>
-              DB
-            </span>
-
-            Dashboard
-          </Link>
-
-
-          <Link
-            to="/admin/branches"
-            className="branches-nav-link active"
-          >
-            <span>
-              BR
-            </span>
-
-            Branches
-          </Link>
-
-
-          <Link
-            to="/admin/categories"
-            className="branches-nav-link"
-          >
-            <span>
-              CT
-            </span>
-
-            Categories
-          </Link>
-
-
-          <Link
-            to="/admin/services"
-            className="branches-nav-link"
-          >
-            <span>
-              SV
-            </span>
-
-            Services
-          </Link>
-
-
-          <Link
-            to="/admin/customers"
-            className="branches-nav-link"
-          >
-            <span>
-              CU
-            </span>
-
-            Customers
-          </Link>
-
-        </nav>
-
-      </aside>
+      <AdminNavbar />
 
 
       {/* =================================

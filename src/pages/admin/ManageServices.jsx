@@ -4,7 +4,7 @@ import {
   useState,
 } from "react";
 
-import { Link } from "react-router-dom";
+import AdminNavbar from "../../components/AdminNavbar";
 
 import {
   createService,
@@ -858,97 +858,7 @@ function ManageServices() {
           SIDEBAR
       ================================= */}
 
-      <aside className="services-sidebar">
-
-        <div className="services-sidebar-brand">
-
-          <div className="services-brand-logo">
-            PBZ
-          </div>
-
-
-          <div>
-            <h1>
-              PBZ GIS
-            </h1>
-
-            <p>
-              Administration
-            </p>
-          </div>
-
-        </div>
-
-
-        <nav className="services-navigation">
-
-          <p className="services-navigation-title">
-            MAIN MENU
-          </p>
-
-
-          <Link
-            to="/admin/dashboard"
-            className="services-nav-link"
-          >
-            <span>
-              DB
-            </span>
-
-            Dashboard
-          </Link>
-
-
-          <Link
-            to="/admin/branches"
-            className="services-nav-link"
-          >
-            <span>
-              BR
-            </span>
-
-            Branches
-          </Link>
-
-
-          <Link
-            to="/admin/categories"
-            className="services-nav-link"
-          >
-            <span>
-              CT
-            </span>
-
-            Categories
-          </Link>
-
-
-          <Link
-            to="/admin/services"
-            className="services-nav-link active"
-          >
-            <span>
-              SV
-            </span>
-
-            Services
-          </Link>
-
-
-          <Link
-            to="/admin/customers"
-            className="services-nav-link"
-          >
-            <span>
-              CU
-            </span>
-
-            Customers
-          </Link>
-
-        </nav>
-
-      </aside>
+      <AdminNavbar />
 
 
       {/* =================================

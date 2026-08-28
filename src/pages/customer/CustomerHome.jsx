@@ -195,12 +195,10 @@ function CustomerHome() {
           </div>
         </Link>
 
-        {/* Main Navigation */}
-
         <nav className="customer-home-navigation">
           <Link
             to="/"
-            className="customer-home-nav-link active"
+            className="customer-home-nav-link is-active"
           >
             Home
           </Link>
@@ -217,6 +215,20 @@ function CustomerHome() {
             className="customer-home-nav-link"
           >
             Services
+          </Link>
+
+          <Link
+            to="/atms"
+            className="customer-home-nav-link"
+          >
+            ATMs
+          </Link>
+
+          <Link
+            to="/map"
+            className="customer-home-nav-link"
+          >
+            Map
           </Link>
         </nav>
 
