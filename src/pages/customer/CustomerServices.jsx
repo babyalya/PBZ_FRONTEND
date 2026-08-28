@@ -1,5 +1,13 @@
-import { useEffect, useMemo, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+
+import {
+  Link,
+  useNavigate,
+} from "react-router-dom";
 
 import {
   getBranches,
@@ -8,142 +16,271 @@ import {
 
 import "./CustomerServices.css";
 
+
 function CustomerServices() {
-  const navigate = useNavigate();
+  const navigate =
+    useNavigate();
 
-  const [branches, setBranches] = useState([]);
-  const [services, setServices] = useState([]);
+  const [branches, setBranches] =
+    useState([]);
 
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedService, setSelectedService] =
-    useState(null);
+  const [services, setServices] =
+    useState([]);
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [
+    searchTerm,
+    setSearchTerm,
+  ] = useState("");
 
-  const loadServicesPageData = async () => {
-    try {
-      setIsLoading(true);
-      setErrorMessage("");
+  const [
+    selectedService,
+    setSelectedService,
+  ] = useState(null);
 
-      const [
-        branchesResponse,
-        servicesResponse,
-      ] = await Promise.all([
-        getBranches(),
-        getServices(),
-      ]);
+  const [
+    isLoading,
+    setIsLoading,
+  ] = useState(true);
 
-      setBranches(
-        Array.isArray(branchesResponse.data)
-          ? branchesResponse.data
-          : []
-      );
+  const [
+    errorMessage,
+    setErrorMessage,
+  ] = useState("");
 
-      setServices(
-        Array.isArray(servicesResponse.data)
-          ? servicesResponse.data
-          : []
-      );
-    } catch (error) {
-      console.error(
-        "Failed to load services page:",
-        error
-      );
 
-      setErrorMessage(
-        error.response?.data?.detail ||
-          "Unable to load PBZ services. Please try again."
-      );
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  /*
+  |--------------------------------------------------------------------------
+  | LOAD DATA
+  |--------------------------------------------------------------------------
+  */
+
+  const loadServicesPageData =
+    async () => {
+      try {
+        setIsLoading(true);
+        setErrorMessage("");
+
+        const [
+          branchesResponse,
+          servicesResponse,
+        ] = await Promise.all([
+          getBranches(),
+          getServices(),
+        ]);
+
+        setBranches(
+          Array.isArray(
+            branchesResponse.data
+          )
+            ? branchesResponse.data
+            : []
+        );
+
+        setServices(
+          Array.isArray(
+            servicesResponse.data
+          )
+            ? servicesResponse.data
+            : []
+        );
+      } catch (error) {
+        console.error(
+          "Failed to load services page:",
+          error
+        );
+
+        setErrorMessage(
+          error.response?.data
+            ?.detail ||
+            "Unable to load PBZ services. Please try again."
+        );
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
 
   useEffect(() => {
     loadServicesPageData();
   }, []);
 
-  const groupedServices = useMemo(() => {
-    const grouped = {};
 
-    services.forEach((service) => {
-      const normalizedName =
-        service.service_name
-          ?.trim()
-          .toLowerCase();
+  /*
+  |--------------------------------------------------------------------------
+  | GET SERVICE BRANCH IDS
+  |--------------------------------------------------------------------------
+  |
+  | Supports both:
+  |
+  | branches: [1, 2, 3]
+  |
+  | and:
+  |
+  | branches: [
+  |   { id: 1, branch_name: "..." }
+  | ]
+  |
+  */
 
-      if (!normalizedName) {
-        return;
-      }
-
-      if (!grouped[normalizedName]) {
-        grouped[normalizedName] = {
-          service_name:
-            service.service_name.trim(),
-
-          description:
-            service.description || "",
-
-          branches: [],
-        };
-      }
-
-      const branch = branches.find(
-        (item) =>
-          Number(item.id) ===
-          Number(service.branch)
-      );
-
-      if (
-        branch &&
-        !grouped[
-          normalizedName
-        ].branches.some(
-          (item) =>
-            Number(item.id) ===
-            Number(branch.id)
-        )
-      ) {
-        grouped[
-          normalizedName
-        ].branches.push(branch);
-      }
-    });
-
-    return Object.values(grouped);
-  }, [services, branches]);
-
-  const filteredServices = useMemo(() => {
-    const cleanedSearch =
-      searchTerm.trim().toLowerCase();
-
-    if (!cleanedSearch) {
-      return groupedServices;
+  const getServiceBranchIds = (
+    service
+  ) => {
+    if (
+      !Array.isArray(
+        service?.branches
+      )
+    ) {
+      return [];
     }
 
-    return groupedServices.filter((service) => {
-      const branchNames =
-        service.branches
-          .map((branch) => branch.branch_name)
-          .join(" ")
+    return service.branches
+      .map((branch) => {
+        if (
+          typeof branch ===
+          "object"
+        ) {
+          return Number(
+            branch.id
+          );
+        }
+
+        return Number(branch);
+      })
+      .filter(
+        (id) =>
+          Number.isFinite(id)
+      );
+  };
+
+
+  /*
+  |--------------------------------------------------------------------------
+  | PREPARE SERVICES FOR DISPLAY
+  |--------------------------------------------------------------------------
+  |
+  | Since one service record can now have
+  | many branches, we no longer need to
+  | group repeated service names.
+  |
+  | Each backend service becomes one card.
+  |
+  */
+
+  const preparedServices =
+    useMemo(() => {
+      return services
+        .map((service) => {
+          const branchIds =
+            getServiceBranchIds(
+              service
+            );
+
+          const serviceBranches =
+            branchIds
+              .map(
+                (branchId) =>
+                  branches.find(
+                    (branch) =>
+                      Number(
+                        branch.id
+                      ) ===
+                      Number(
+                        branchId
+                      )
+                  )
+              )
+              .filter(Boolean);
+
+          return {
+            ...service,
+
+            branches:
+              serviceBranches,
+          };
+        })
+        .filter(
+          (service) =>
+            service.service_name
+              ?.trim()
+        );
+    }, [
+      services,
+      branches,
+    ]);
+
+
+  /*
+  |--------------------------------------------------------------------------
+  | FILTER SERVICES
+  |--------------------------------------------------------------------------
+  */
+
+  const filteredServices =
+    useMemo(() => {
+      const cleanedSearch =
+        searchTerm
+          .trim()
           .toLowerCase();
 
-      const searchableText = [
-        service.service_name,
-        service.description,
-        branchNames,
-      ]
-        .filter(Boolean)
-        .join(" ")
-        .toLowerCase();
+      if (!cleanedSearch) {
+        return preparedServices;
+      }
 
-      return searchableText.includes(cleanedSearch);
-    });
-  }, [groupedServices, searchTerm]);
+      return preparedServices.filter(
+        (service) => {
+          const branchNames =
+            service.branches
+              .map(
+                (branch) =>
+                  branch.branch_name ||
+                  ""
+              )
+              .join(" ")
+              .toLowerCase();
 
-  const openService = (service) => {
-    setSelectedService(service);
+          const branchAddresses =
+            service.branches
+              .map(
+                (branch) =>
+                  branch.address ||
+                  ""
+              )
+              .join(" ")
+              .toLowerCase();
+
+          const searchableText = [
+            service.service_name,
+            service.description,
+            branchNames,
+            branchAddresses,
+          ]
+            .filter(Boolean)
+            .join(" ")
+            .toLowerCase();
+
+          return searchableText.includes(
+            cleanedSearch
+          );
+        }
+      );
+    }, [
+      preparedServices,
+      searchTerm,
+    ]);
+
+
+  /*
+  |--------------------------------------------------------------------------
+  | SELECT SERVICE
+  |--------------------------------------------------------------------------
+  */
+
+  const openService = (
+    service
+  ) => {
+    setSelectedService(
+      service
+    );
 
     window.scrollTo({
       top: 0,
@@ -151,15 +288,32 @@ function CustomerServices() {
     });
   };
 
+
   const closeService = () => {
-    setSelectedService(null);
+    setSelectedService(
+      null
+    );
   };
 
-  const openBranchDetails = (branchId) => {
-    navigate(`/branches/${branchId}`);
+
+  /*
+  |--------------------------------------------------------------------------
+  | NAVIGATION
+  |--------------------------------------------------------------------------
+  */
+
+  const openBranchDetails = (
+    branchId
+  ) => {
+    navigate(
+      `/branches/${branchId}`
+    );
   };
 
-  const openBranchOnMap = (branch) => {
+
+  const openBranchOnMap = (
+    branch
+  ) => {
     navigate(
       `/map?branch=${
         branch.id
@@ -169,11 +323,22 @@ function CustomerServices() {
     );
   };
 
+
+  /*
+  |--------------------------------------------------------------------------
+  | RENDER
+  |--------------------------------------------------------------------------
+  */
+
   return (
     <div className="customer-services-page">
-      {/* Navbar */}
+
+      {/* =================================
+          NAVBAR
+      ================================= */}
 
       <header className="customer-services-navbar">
+
         <Link
           to="/"
           className="customer-services-brand"
@@ -183,7 +348,9 @@ function CustomerServices() {
           </div>
 
           <div>
-            <strong>PBZ GIS</strong>
+            <strong>
+              PBZ GIS
+            </strong>
 
             <span>
               Branch & ATM Locator
@@ -191,7 +358,9 @@ function CustomerServices() {
           </div>
         </Link>
 
+
         <nav className="customer-services-nav">
+
           <Link to="/">
             Home
           </Link>
@@ -210,56 +379,82 @@ function CustomerServices() {
           <Link to="/map">
             Map
           </Link>
+
         </nav>
+
 
         <Link
           to="/map"
           className="customer-services-map-button"
         >
           Open GIS Map
-          <span>→</span>
+
+          <span>
+            →
+          </span>
         </Link>
+
       </header>
 
+
       <main>
-        {/* Hero */}
+
+        {/* =================================
+            HERO
+        ================================= */}
 
         <section className="customer-services-hero">
+
           <div className="customer-services-circle circle-one"></div>
+
           <div className="customer-services-circle circle-two"></div>
 
+
           <div className="customer-services-hero-content">
+
             <div>
+
               <span className="customer-services-overline">
                 PBZ BANKING SERVICES
               </span>
 
+
               <h1>
-                Find the right banking service
-                before visiting a branch.
+                Find the right banking
+                service before visiting
+                a branch.
               </h1>
 
+
               <p>
-                Explore the services available
-                across PBZ branches and identify
-                where each service is offered.
+                Explore banking services
+                offered by PBZ and find
+                every branch where each
+                service is available.
               </p>
+
             </div>
 
+
             <div className="customer-services-hero-summary">
+
               <article>
+
                 <span>
-                  Unique services
+                  Banking services
                 </span>
 
                 <strong>
                   {isLoading
                     ? "..."
-                    : groupedServices.length}
+                    : preparedServices.length}
                 </strong>
+
               </article>
 
+
               <article>
+
                 <span>
                   PBZ branches
                 </span>
@@ -269,66 +464,110 @@ function CustomerServices() {
                     ? "..."
                     : branches.length}
                 </strong>
+
               </article>
 
+
               <article>
+
                 <span>
-                  Service records
+                  Service assignments
                 </span>
 
                 <strong>
                   {isLoading
                     ? "..."
-                    : services.length}
+                    : preparedServices.reduce(
+                        (
+                          total,
+                          service
+                        ) =>
+                          total +
+                          service.branches
+                            .length,
+                        0
+                      )}
                 </strong>
+
               </article>
+
             </div>
+
           </div>
+
         </section>
 
-        {/* Content */}
+
+        {/* =================================
+            CONTENT
+        ================================= */}
 
         <section className="customer-services-content">
-          {/* Search */}
+
+          {/* SEARCH */}
 
           <div className="customer-services-search-card">
+
             <div className="customer-services-search-input">
-              <span>⌕</span>
+
+              <span>
+                ⌕
+              </span>
 
               <input
                 type="search"
-                value={searchTerm}
-                onChange={(event) =>
+                value={
+                  searchTerm
+                }
+                onChange={(
+                  event
+                ) =>
                   setSearchTerm(
-                    event.target.value
+                    event.target
+                      .value
                   )
                 }
-                placeholder="Search service or branch..."
+                placeholder="Search service, branch or location..."
                 aria-label="Search PBZ services"
               />
+
             </div>
 
+
             {searchTerm && (
+
               <button
                 type="button"
                 onClick={() =>
-                  setSearchTerm("")
+                  setSearchTerm(
+                    ""
+                  )
                 }
               >
                 Clear
               </button>
+
             )}
+
           </div>
 
-          {/* Selected Service */}
+
+          {/* =================================
+              SELECTED SERVICE
+          ================================= */}
 
           {selectedService && (
+
             <section className="customer-selected-service">
+
               <div className="customer-selected-service-header">
+
                 <div>
+
                   <span>
                     SELECTED SERVICE
                   </span>
+
 
                   <h2>
                     {
@@ -336,53 +575,76 @@ function CustomerServices() {
                     }
                   </h2>
 
+
                   <p>
                     {selectedService.description ||
                       "This banking service is available at selected PBZ branches."}
                   </p>
+
                 </div>
+
 
                 <button
                   type="button"
-                  onClick={closeService}
+                  onClick={
+                    closeService
+                  }
                   aria-label="Close selected service"
                 >
                   ×
                 </button>
+
               </div>
 
+
               <div className="customer-selected-service-summary">
+
                 <div>
+
                   <span>
                     Available at
                   </span>
 
                   <strong>
                     {
-                      selectedService.branches
+                      selectedService
+                        .branches
                         .length
                     }{" "}
-                    {selectedService.branches
+                    {selectedService
+                      .branches
                       .length === 1
                       ? "branch"
                       : "branches"}
                   </strong>
+
                 </div>
+
               </div>
 
-              {selectedService.branches.length >
+
+              {selectedService
+                .branches.length >
               0 ? (
+
                 <div className="customer-service-branches-grid">
+
                   {selectedService.branches.map(
                     (branch) => (
+
                       <article
-                        key={branch.id}
+                        key={
+                          branch.id
+                        }
                         className="customer-service-branch-card"
                       >
+
                         <div className="customer-service-branch-top">
+
                           <div>
                             PBZ
                           </div>
+
 
                           <span
                             className={
@@ -397,19 +659,27 @@ function CustomerServices() {
                               ? "ATM Available"
                               : "ATM Unavailable"}
                           </span>
+
                         </div>
 
+
                         <h3>
-                          {branch.branch_name}
+                          {
+                            branch.branch_name
+                          }
                         </h3>
+
 
                         <p>
                           {branch.address ||
                             "Address not available"}
                         </p>
 
+
                         <div className="customer-service-branch-info">
+
                           <div>
+
                             <span>
                               Phone
                             </span>
@@ -418,9 +688,12 @@ function CustomerServices() {
                               {branch.phone ||
                                 "Not available"}
                             </strong>
+
                           </div>
 
+
                           <div>
+
                             <span>
                               Hours
                             </span>
@@ -429,10 +702,14 @@ function CustomerServices() {
                               {branch.opening_hours ||
                                 "Not available"}
                             </strong>
+
                           </div>
+
                         </div>
 
+
                         <div className="customer-service-branch-actions">
+
                           <button
                             type="button"
                             onClick={() =>
@@ -444,6 +721,7 @@ function CustomerServices() {
                             View Details
                           </button>
 
+
                           <button
                             type="button"
                             onClick={() =>
@@ -453,30 +731,50 @@ function CustomerServices() {
                             }
                           >
                             View Map
-                            <span>→</span>
+
+                            <span>
+                              →
+                            </span>
                           </button>
+
                         </div>
+
                       </article>
+
                     )
                   )}
+
                 </div>
+
               ) : (
+
                 <div className="customer-service-no-branches">
-                  No branch information is
-                  currently available for this
-                  service.
+
+                  This service is not
+                  currently assigned to
+                  any PBZ branch.
+
                 </div>
+
               )}
+
             </section>
+
           )}
 
-          {/* Toolbar */}
+
+          {/* =================================
+              TOOLBAR
+          ================================= */}
 
           <div className="customer-services-toolbar">
+
             <div>
+
               <span>
                 AVAILABLE SERVICES
               </span>
+
 
               <strong>
                 {isLoading
@@ -488,30 +786,52 @@ function CustomerServices() {
                         : "services"
                     } found`}
               </strong>
+
             </div>
 
+
             <Link to="/branches">
+
               Browse branches
-              <span>→</span>
+
+              <span>
+                →
+              </span>
+
             </Link>
+
           </div>
 
-          {/* Error */}
+
+          {/* =================================
+              ERROR
+          ================================= */}
 
           {errorMessage && (
+
             <div className="customer-services-error">
-              <div>!</div>
 
               <div>
+                !
+              </div>
+
+
+              <div>
+
                 <strong>
                   We couldn't load the
                   services.
                 </strong>
 
+
                 <p>
-                  {errorMessage}
+                  {
+                    errorMessage
+                  }
                 </p>
+
               </div>
+
 
               <button
                 type="button"
@@ -521,20 +841,38 @@ function CustomerServices() {
               >
                 Try Again
               </button>
+
             </div>
+
           )}
 
-          {/* Loading */}
+
+          {/* =================================
+              LOADING
+          ================================= */}
 
           {!errorMessage &&
             isLoading && (
+
               <div className="customer-services-grid">
-                {[1, 2, 3, 4, 5, 6].map(
+
+                {[
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                ].map(
                   (item) => (
+
                     <article
-                      key={item}
+                      key={
+                        item
+                      }
                       className="customer-service-card service-loading-card"
                     >
+
                       <div className="service-skeleton service-skeleton-icon"></div>
 
                       <div className="service-skeleton service-skeleton-title"></div>
@@ -544,154 +882,250 @@ function CustomerServices() {
                       <div className="service-skeleton service-skeleton-line short"></div>
 
                       <div className="service-skeleton service-skeleton-button"></div>
+
                     </article>
+
                   )
                 )}
+
               </div>
+
             )}
 
-          {/* Services Grid */}
+
+          {/* =================================
+              SERVICES GRID
+          ================================= */}
 
           {!errorMessage &&
             !isLoading &&
-            filteredServices.length > 0 && (
+            filteredServices.length >
+              0 && (
+
               <div className="customer-services-grid">
+
                 {filteredServices.map(
-                  (service, index) => (
+                  (
+                    service,
+                    index
+                  ) => (
+
                     <article
                       key={
-                        service.service_name
+                        service.id
                       }
                       className="customer-service-card"
                     >
+
                       <div className="customer-service-card-top">
+
                         <div className="customer-service-icon">
                           SV
                         </div>
 
+
                         <span>
                           {String(
                             index + 1
-                          ).padStart(2, "0")}
+                          ).padStart(
+                            2,
+                            "0"
+                          )}
                         </span>
+
                       </div>
 
+
                       <div className="customer-service-card-body">
+
                         <h2>
                           {
                             service.service_name
                           }
                         </h2>
 
+
                         <p>
                           {service.description ||
                             "Explore PBZ branches that provide this banking service."}
                         </p>
+
                       </div>
 
+
                       <div className="customer-service-availability">
+
                         <span>
                           Available at
                         </span>
 
+
                         <strong>
                           {
-                            service.branches
+                            service
+                              .branches
                               .length
                           }{" "}
-                          {service.branches
+                          {service
+                            .branches
                             .length === 1
                             ? "branch"
                             : "branches"}
                         </strong>
+
                       </div>
+
 
                       <div className="customer-service-branch-preview">
-                        {service.branches.length >
+
+                        {service
+                          .branches
+                          .length >
                         0 ? (
-                          service.branches
-                            .slice(0, 3)
-                            .map((branch) => (
-                              <span
-                                key={
-                                  branch.id
-                                }
-                              >
-                                {
-                                  branch.branch_name
-                                }
+
+                          <>
+
+                            {service.branches
+                              .slice(
+                                0,
+                                3
+                              )
+                              .map(
+                                (
+                                  branch
+                                ) => (
+
+                                  <span
+                                    key={
+                                      branch.id
+                                    }
+                                  >
+                                    {
+                                      branch.branch_name
+                                    }
+                                  </span>
+
+                                )
+                              )}
+
+
+                            {service
+                              .branches
+                              .length >
+                              3 && (
+
+                              <span className="more">
+
+                                +
+                                {service
+                                  .branches
+                                  .length -
+                                  3}{" "}
+                                more
+
                               </span>
-                            ))
+
+                            )}
+
+                          </>
+
                         ) : (
+
                           <span>
-                            No branches listed
+                            No branches
+                            currently
+                            assigned
                           </span>
+
                         )}
 
-                        {service.branches.length >
-                          3 && (
-                          <span className="more">
-                            +
-                            {service.branches
-                              .length - 3}{" "}
-                            more
-                          </span>
-                        )}
                       </div>
+
 
                       <button
                         type="button"
                         className="customer-service-view-button"
                         onClick={() =>
-                          openService(service)
+                          openService(
+                            service
+                          )
                         }
                       >
+
                         View Service Branches
-                        <span>→</span>
+
+                        <span>
+                          →
+                        </span>
+
                       </button>
+
                     </article>
+
                   )
                 )}
+
               </div>
+
             )}
 
-          {/* Empty */}
+
+          {/* =================================
+              EMPTY
+          ================================= */}
 
           {!errorMessage &&
             !isLoading &&
             filteredServices.length ===
               0 && (
+
               <div className="customer-services-empty">
-                <div>⌕</div>
+
+                <div>
+                  ⌕
+                </div>
+
 
                 <span>
                   NO SERVICES FOUND
                 </span>
 
+
                 <h2>
-                  No service matches your
-                  search.
+                  No service matches
+                  your search.
                 </h2>
 
+
                 <p>
-                  Try searching using another
-                  service or branch name.
+                  Try another service
+                  name, branch name or
+                  branch location.
                 </p>
+
 
                 <button
                   type="button"
                   onClick={() =>
-                    setSearchTerm("")
+                    setSearchTerm(
+                      ""
+                    )
                   }
                 >
                   Clear Search
                 </button>
+
               </div>
+
             )}
+
         </section>
+
       </main>
+
     </div>
   );
 }
+
 
 export default CustomerServices;

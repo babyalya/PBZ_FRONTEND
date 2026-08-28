@@ -167,6 +167,11 @@ function AdminDashboard() {
             <span className="sidebar-link-icon">MP</span>
             <span>GIS Map</span>
           </Link>
+
+          <Link to="/admin/reports" className="sidebar-link">
+            <span className="sidebar-link-icon">RP</span>
+            <span>Reports</span>
+          </Link>
         </nav>
 
         <div className="sidebar-footer">

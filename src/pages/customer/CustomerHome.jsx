@@ -176,6 +176,8 @@ function CustomerHome() {
   return (
     <div className="customer-home-page">
       <header className="customer-home-navbar">
+        {/* Brand */}
+
         <Link
           to="/"
           className="customer-home-brand"
@@ -186,9 +188,39 @@ function CustomerHome() {
 
           <div>
             <strong>PBZ GIS</strong>
-            <span>Branch & ATM Locator</span>
+
+            <span>
+              Branch & ATM Locator
+            </span>
           </div>
         </Link>
+
+        {/* Main Navigation */}
+
+        <nav className="customer-home-navigation">
+          <Link
+            to="/"
+            className="customer-home-nav-link active"
+          >
+            Home
+          </Link>
+
+          <Link
+            to="/branches"
+            className="customer-home-nav-link"
+          >
+            Branches
+          </Link>
+
+          <Link
+            to="/services"
+            className="customer-home-nav-link"
+          >
+            Services
+          </Link>
+        </nav>
+
+        {/* Right Actions */}
 
         <div className="customer-home-navbar-actions">
           {customerIsLoggedIn ? (
@@ -203,7 +235,9 @@ function CustomerHome() {
                 onClick={handleLogout}
                 disabled={isLoggingOut}
               >
-                {isLoggingOut ? "Signing out..." : "Logout"}
+                {isLoggingOut
+                  ? "Signing out..."
+                  : "Logout"}
               </button>
             </>
           ) : (

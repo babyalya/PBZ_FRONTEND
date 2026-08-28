@@ -681,3 +681,539 @@
     padding: 10px;
   }
 }
+
+/* ============================================================
+   MANY-TO-MANY SERVICE BRANCH SELECTION
+============================================================ */
+
+
+/* Label + buttons */
+
+.service-branches-label-row {
+  margin-bottom: 10px;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+
+.service-branches-label-row
+  label {
+  margin-bottom: 0;
+}
+
+
+.service-branches-label-row
+  p {
+  margin:
+    4px 0 0;
+
+  color: #85918a;
+
+  font-size: 10px;
+
+  line-height: 1.5;
+}
+
+
+.service-branch-selection-actions {
+  display: flex;
+
+  gap: 7px;
+
+  flex-shrink: 0;
+}
+
+
+.service-branch-selection-actions
+  button {
+  min-height: 32px;
+
+  padding:
+    0 10px;
+
+  border:
+    1px solid #d6e3db;
+
+  border-radius: 8px;
+
+  color: #08754b;
+
+  background: #f7fbf9;
+
+  font-size: 9px;
+
+  font-weight: 850;
+
+  cursor: pointer;
+
+  transition:
+    border-color 150ms ease,
+    background 150ms ease,
+    transform 150ms ease;
+}
+
+
+.service-branch-selection-actions
+  button:hover {
+  transform:
+    translateY(-1px);
+
+  border-color: #acd1bd;
+
+  background: #edf8f2;
+}
+
+
+/* ============================================================
+   BRANCH SELECTOR
+============================================================ */
+
+.service-branches-selector {
+  max-height: 290px;
+
+  padding: 9px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+  gap: 9px;
+
+  overflow-y: auto;
+
+  border:
+    1px solid #dce5df;
+
+  border-radius: 13px;
+
+  background: #f8fbf9;
+
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+
+.service-branches-selector.has-error {
+  border-color: #cf5656;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(
+      207,
+      86,
+      86,
+      0.08
+    );
+}
+
+
+.service-branches-selector::-webkit-scrollbar {
+  width: 6px;
+}
+
+
+.service-branches-selector::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+.service-branches-selector::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+
+  background: #cad7cf;
+}
+
+
+/* ============================================================
+   CHECKBOX BRANCH CARD
+============================================================ */
+
+.service-branch-checkbox {
+  min-height: 67px;
+
+  padding: 11px;
+
+  display: grid !important;
+
+  grid-template-columns:
+    24px
+    1fr;
+
+  align-items: center;
+
+  gap: 10px;
+
+  border:
+    1px solid #dde7e1;
+
+  border-radius: 11px;
+
+  background: #ffffff;
+
+  cursor: pointer;
+
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+
+.service-branch-checkbox:hover {
+  transform:
+    translateY(-1px);
+
+  border-color: #bad8c7;
+
+  background: #f8fcfa;
+}
+
+
+.service-branch-checkbox.selected {
+  border-color: #8ec5a7;
+
+  background:
+    linear-gradient(
+      135deg,
+      #edf9f2,
+      #f8fcfa
+    );
+
+  box-shadow:
+    0 4px 13px
+    rgba(
+      15,
+      117,
+      70,
+      0.07
+    );
+}
+
+
+.service-branch-checkbox
+  input {
+  position: absolute;
+
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+
+/* Checkbox square */
+
+.service-checkbox-control {
+  width: 23px;
+  height: 23px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border:
+    1px solid #cad8d0;
+
+  border-radius: 7px;
+
+  color: #ffffff;
+
+  background: #ffffff;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  transition:
+    border-color 160ms ease,
+    background 160ms ease;
+}
+
+
+.service-branch-checkbox.selected
+  .service-checkbox-control {
+  border-color: #118454;
+
+  background:
+    linear-gradient(
+      135deg,
+      #08754a,
+      #15945c
+    );
+}
+
+
+/* Branch details */
+
+.service-checkbox-branch-info {
+  min-width: 0;
+}
+
+
+.service-checkbox-branch-info
+  strong {
+  display: block;
+
+  overflow: hidden;
+
+  color: #354a3e;
+
+  font-size: 10px;
+
+  font-weight: 850;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+.service-checkbox-branch-info
+  small {
+  display: block;
+
+  margin-top: 4px;
+
+  overflow: hidden;
+
+  color: #8a9690 !important;
+
+  font-size: 8px !important;
+
+  font-weight: 500;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   SELECTED COUNT
+============================================================ */
+
+.service-selected-branches-summary {
+  margin-top: 9px;
+
+  padding:
+    9px 11px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  border:
+    1px solid #dce7e0;
+
+  border-radius: 9px;
+
+  background: #f7faf8;
+}
+
+
+.service-selected-branches-summary
+  span {
+  color: #7e8c84;
+
+  font-size: 9px;
+
+  font-weight: 700;
+}
+
+
+.service-selected-branches-summary
+  strong {
+  color: #08764b;
+
+  font-size: 10px;
+
+  font-weight: 900;
+}
+
+
+.service-branches-error {
+  display: block;
+
+  margin-top: 7px;
+
+  color: #c74848 !important;
+
+  font-size: 9px !important;
+}
+
+
+.service-no-branch-options {
+  grid-column:
+    1 / -1;
+
+  padding:
+    25px 15px;
+
+  color: #87938c;
+
+  text-align: center;
+
+  font-size: 10px;
+}
+
+
+/* ============================================================
+   BRANCHES IN SERVICES TABLE
+============================================================ */
+
+.service-branches-table-cell {
+  min-width: 230px;
+}
+
+
+.service-branch-count {
+  margin-bottom: 7px;
+
+  color: #08764b;
+
+  font-size: 9px;
+
+  font-weight: 850;
+}
+
+
+.service-table-branch-tags {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 5px;
+}
+
+
+.service-table-branch-tags
+  .service-branch-badge {
+  padding:
+    5px 7px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  border:
+    1px solid #d5e5dc;
+
+  border-radius: 7px;
+
+  color: #456155;
+
+  background: #f4faf7;
+
+  font-size: 8px;
+
+  font-weight: 750;
+}
+
+
+.service-table-branch-tags
+  .service-branch-badge.more {
+  color: #08764b;
+
+  border-color: #bddbc9;
+
+  background: #eaf7f0;
+}
+
+
+.service-no-branches {
+  color: #a06d38;
+
+  font-size: 9px;
+
+  font-weight: 700;
+}
+
+
+/* ============================================================
+   DELETE MODAL BRANCH INFO
+============================================================ */
+
+.service-delete-branch-info {
+  margin-top: 15px;
+
+  padding: 11px 13px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  border:
+    1px solid #e0e8e3;
+
+  border-radius: 10px;
+
+  background: #f8faf9;
+}
+
+
+.service-delete-branch-info
+  span {
+  color: #85918a;
+
+  font-size: 9px;
+}
+
+
+.service-delete-branch-info
+  strong {
+  color: #08764b;
+
+  font-size: 10px;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 700px) {
+
+  .service-branches-selector {
+    grid-template-columns: 1fr;
+  }
+
+
+  .service-branches-label-row {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+}
+
+
+@media (max-width: 430px) {
+
+  .service-branch-selection-actions {
+    width: 100%;
+  }
+
+
+  .service-branch-selection-actions
+    button {
+    flex: 1;
+  }
+
+}

@@ -986,3 +986,608 @@ a {
     border-radius: 0;
   }
 }
+
+/* ============================================================
+   BRANCH LOCATION SELECTION
+   Added for Map / Manual location entry
+============================================================ */
+
+/* Location method selector */
+
+.branch-location-mode {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+
+  padding: 6px;
+
+  border:
+    1px solid #dce6df;
+
+  border-radius: 14px;
+
+  background: #f5f8f6;
+}
+
+
+.branch-location-mode > button {
+  min-height: 72px;
+
+  padding: 12px 13px;
+
+  display: grid;
+
+  grid-template-columns:
+    38px 1fr;
+
+  align-items: center;
+
+  gap: 10px;
+
+  border:
+    1px solid transparent;
+
+  border-radius: 11px;
+
+  color: #6a776f;
+
+  background: transparent;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+
+.branch-location-mode
+  > button
+  > span {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  color: #668076;
+
+  background: #e8efeb;
+
+  font-size: 9px;
+  font-weight: 900;
+
+  transition:
+    color 160ms ease,
+    background 160ms ease;
+}
+
+
+.branch-location-mode
+  > button
+  strong {
+  display: block;
+
+  font-size: 11px;
+
+  font-weight: 850;
+}
+
+
+.branch-location-mode
+  > button
+  small {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #89958e;
+
+  font-size: 9px;
+
+  line-height: 1.4;
+}
+
+
+.branch-location-mode
+  > button:hover {
+  transform: translateY(-1px);
+
+  color: #08754b;
+
+  border-color: #c9ddd1;
+
+  background: #ffffff;
+}
+
+
+.branch-location-mode
+  > button.active {
+  color: #08754b;
+
+  border-color: #acd2bc;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 6px 18px
+    rgba(
+      15,
+      113,
+      69,
+      0.09
+    );
+}
+
+
+.branch-location-mode
+  > button.active
+  > span {
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #08754a,
+      #15945c
+    );
+}
+
+
+/* ============================================================
+   MAP WRAPPER
+============================================================ */
+
+.branch-location-map-wrapper {
+  position: relative;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  border:
+    1px solid #d5e3da;
+
+  border-radius: 16px;
+
+  background: #e5eee8;
+
+  box-shadow:
+    0 8px 24px
+    rgba(
+      32,
+      72,
+      47,
+      0.07
+    );
+}
+
+
+.branch-location-map {
+  width: 100%;
+
+  height: 350px;
+
+  z-index: 1;
+}
+
+
+/*
+ * Prevent Leaflet controls from
+ * overlapping modal elements.
+ */
+
+.branch-location-map
+  .leaflet-control-container {
+  position: relative;
+
+  z-index: 5;
+}
+
+
+.branch-location-map
+  .leaflet-control-zoom {
+  overflow: hidden;
+
+  border: none;
+
+  border-radius: 10px;
+
+  box-shadow:
+    0 5px 18px
+    rgba(
+      26,
+      67,
+      42,
+      0.16
+    );
+}
+
+
+.branch-location-map
+  .leaflet-control-zoom
+  a {
+  color: #08754b;
+
+  border-bottom:
+    1px solid #e5ece8;
+
+  background: #ffffff;
+}
+
+
+/* Instruction overlay */
+
+.branch-map-help-overlay {
+  position: absolute;
+
+  top: 13px;
+
+  left: 50%;
+
+  z-index: 500;
+
+  min-height: 34px;
+
+  padding:
+    0 13px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border:
+    1px solid
+    rgba(
+      211,
+      226,
+      217,
+      0.95
+    );
+
+  border-radius: 9px;
+
+  color: #476056;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.94
+    );
+
+  box-shadow:
+    0 6px 18px
+    rgba(
+      29,
+      66,
+      43,
+      0.15
+    );
+
+  backdrop-filter: blur(6px);
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  pointer-events: none;
+
+  transform:
+    translateX(-50%);
+}
+
+
+/* ============================================================
+   LOCATION MESSAGE
+============================================================ */
+
+.branch-location-message {
+  margin-top: 9px;
+
+  padding:
+    10px 12px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  border-radius: 10px;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  line-height: 1.5;
+}
+
+
+.branch-location-message > span {
+  width: 23px;
+  height: 23px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  font-size: 9px;
+
+  font-weight: 900;
+}
+
+
+.branch-location-message.success {
+  border:
+    1px solid #c7e3d3;
+
+  color: #176d46;
+
+  background: #f0faf4;
+}
+
+
+.branch-location-message.success
+  > span {
+  color: #ffffff;
+
+  background: #19945d;
+}
+
+
+.branch-location-message.loading {
+  border:
+    1px solid #d7e3dc;
+
+  color: #607168;
+
+  background: #f6faf8;
+}
+
+
+.branch-location-message.loading
+  > span {
+  color: #08754b;
+
+  background: #e2f3ea;
+}
+
+
+/* ============================================================
+   ADDRESS DETECTION
+============================================================ */
+
+.branch-address-detected-input {
+  position: relative;
+}
+
+
+.branch-address-detected-input
+  input {
+  padding-right: 45px;
+}
+
+
+.branch-address-spinner {
+  position: absolute;
+
+  top: 50%;
+
+  right: 14px;
+
+  width: 18px;
+  height: 18px;
+
+  border:
+    2px solid #d7e5dd;
+
+  border-top-color:
+    #118153;
+
+  border-radius: 50%;
+
+  animation:
+    branch-address-loading
+    0.75s
+    linear
+    infinite;
+
+  transform:
+    translateY(-50%);
+}
+
+
+@keyframes branch-address-loading {
+  to {
+    transform:
+      translateY(-50%)
+      rotate(360deg);
+  }
+}
+
+
+.branch-field-note {
+  display: block;
+
+  margin-top: 6px;
+
+  color: #85928a;
+
+  font-size: 9px;
+
+  line-height: 1.45;
+}
+
+
+/* ============================================================
+   READ-ONLY COORDINATES
+============================================================ */
+
+.branch-readonly-coordinate {
+  cursor: default;
+
+  color: #3f5549 !important;
+
+  border-color:
+    #dce7e0 !important;
+
+  background:
+    #f2f7f4 !important;
+}
+
+
+/* ============================================================
+   MANUAL MODE MESSAGE
+============================================================ */
+
+.branch-manual-location-notice {
+  grid-column:
+    1 / -1;
+
+  padding: 13px 14px;
+
+  display: grid;
+
+  grid-template-columns:
+    38px 1fr;
+
+  align-items: center;
+
+  gap: 11px;
+
+  border:
+    1px solid #dce7e0;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f7faf8,
+      #fbfdfc
+    );
+}
+
+
+.branch-manual-location-notice
+  > span {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  color: #08754b;
+
+  background: #e8f5ee;
+
+  font-size: 8px;
+
+  font-weight: 900;
+}
+
+
+.branch-manual-location-notice
+  strong {
+  display: block;
+
+  color: #40544a;
+
+  font-size: 10px;
+}
+
+
+.branch-manual-location-notice
+  p {
+  margin:
+    4px 0 0;
+
+  color: #849087;
+
+  font-size: 9px;
+
+  line-height: 1.45;
+}
+
+
+/* ============================================================
+   SAVE BUTTON DURING ADDRESS LOOKUP
+============================================================ */
+
+.save-branch-button:disabled {
+  cursor: not-allowed;
+
+  opacity: 0.65;
+}
+
+
+/* ============================================================
+   RESPONSIVE LOCATION CONTROLS
+============================================================ */
+
+@media (max-width: 650px) {
+
+  .branch-location-mode {
+    grid-template-columns: 1fr;
+  }
+
+
+  .branch-location-map {
+    height: 290px;
+  }
+
+
+  .branch-map-help-overlay {
+    top: 10px;
+
+    max-width:
+      calc(
+        100% - 80px
+      );
+
+    text-align: center;
+
+    white-space: normal;
+  }
+
+}
+
+
+@media (max-width: 430px) {
+
+  .branch-location-map {
+    height: 250px;
+  }
+
+
+  .branch-location-mode
+    > button {
+    min-height: 65px;
+  }
+
+}
